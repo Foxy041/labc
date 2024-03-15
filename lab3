@@ -2,13 +2,21 @@
 #include <stdio.h>
 #include <stdlib.h>
 int main() {
-	char m[80] = "", *r;
-	r = gets(m);
-	for (int i = 0; i < 80+1; i++){
-		if (m[i] == 'a'){
-			m[i] = 'A';} 
-		else if (m[i] == 'b'){
-			m[i] = 'B';}
-	}	printf("%s\n", m);
-	return 0;	
+    char m[80] = "", *r;
+    r = gets(m);
+
+    for (int i = 0; i < 80 + 1; i++) {
+        if (m[i] == 'a') {
+            m[i] = 'A';
+        }
+        else if (m[i] == 'b') {
+            m[i] = 'B';
+        }
+        else if (m[i] == '!') {
+            m[i] = '?';
+        }
+    }
+
+    printf("%s\n", m);
+    return 0;
 }
