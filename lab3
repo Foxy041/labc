@@ -12,34 +12,3 @@ int main() {
 	}	printf("%s\n", m);
 	return 0;	
 }
-
-Или
-#include "stdio.h"
-int main(){ 
-char s[81];
-if(fgets(s,81,stdin))for(int i=0;s[i];i++)if(s[i]=='a'||s[i]=='b')s[i]-=32;
-puts(s); return 0;} 
-
-или 
-#include <stdio.h>
-#include <ctype.h>
-
-int main()
-{
-const int size = 80;
-char str[size];
-if(fgets(str,size,stdin))
-{
-int i = 0;
-while(str[i] != '\n')
-{
-if(isalpha(str[i]))
-{
-str[i] = toupper(str[i]);
-}
-i++;
-}
-printf("%s",str);
-}
-return 0;
-}
