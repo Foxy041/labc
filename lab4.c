@@ -10,27 +10,3 @@ int perimetr(int a, int b, int c){
 
 double square(double a, double b, double c){
     return ((a+b+c)/2 * ((a+b+c)/2 - a) * ((a+b+c)/2 - b) * ((a+b+c)/2 - c));}
-
-
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
-#include <stdbool.h>
-#include "sours.h"
-
-int main(){
-    double s;
-    int a, b, c, p;
-
-    printf("input:");
-    scanf("%d %d %d", &a, &b, &c);
-
-    if (check(a, b, c)){
-        p = perimetr(a, b, c);
-        s = sqrt(square(a, b, c));
-        printf("perimetr: %d\n", p);
-        printf("square: %.2lf", s);}
-    else {printf("Error");}
-    return 0;}
-
