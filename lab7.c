@@ -57,3 +57,4 @@ int main(){
     fclose(fr);
     fclose(fw);
 	return 0;}
+не ну тут нужен хелп бесспорно 
