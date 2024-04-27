@@ -57,7 +57,3 @@ int main(){
     fclose(fw);
     return 0;
 }
-
-
-
- z [p rfr 'nj ltkfnm djj,ot ,kznm
