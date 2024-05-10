@@ -3,5 +3,5 @@
 консоль. А также реализовать возможность задавать несколько по-лей для упорядочивания.*/
 
 
-#include <stdio>
-#include <stdlib>
+#include <stdio.h>
+#include <stdlib.h>
