@@ -58,4 +58,3 @@ int main(){
     fclose(fr);
     fclose(fw);
 	return 0;}
-ааааа
