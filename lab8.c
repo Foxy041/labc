@@ -64,7 +64,7 @@ int main(){
 
 	for(i = 0; i < size; i++){
 		if(fgets(s, 64, fr) != NULL){
-			sscanf(s,"%s %*s %*d %*s %*f",n), sscanf(s,"%*s %s %*d %*s %*f",sn), \ /*Функция sscanf() идентична функции scanf(), но данные читаются из массива, адресуемого параметром buf, а не из стандартного потока ввода stdin.*/
+			sscanf(s,"%s %*s %*d %*s %*f",n), sscanf(s,"%*s %s %*d %*s %*f",sn),  /*Функция sscanf() идентична функции scanf(), но данные читаются из массива, адресуемого параметром buf, а не из стандартного потока ввода stdin.*/
 			sscanf(s,"%*s %*s %d %*s %*f",&m), sscanf(s,"%*s %*s %*d %s %*f",p), \
 			sscanf(s,"%*s %*s %*d %*s %f",&h);
 			strcpy(hr[i].name, n), strcpy(hr[i].surname, sn), strcpy(hr[i].sex, p); /*Функция strcpy копирует данные из строки, на которую указывает аргумент source, в строку, на которую указывает аргумент destination, пока не встретится символ конца строки (нулевой символ)*/
@@ -89,3 +89,5 @@ int main(){
 	
 	fclose(fr);
 	return 0;}
+
+
