@@ -58,3 +58,11 @@ int main(){
     fclose(fr);
     fclose(fw);
 	return 0;}
+
+blyn ya vashe hz che pysat'
+	aaaaaaa
+	aaaaaaaa
+pomogite
+help please
+heeeeelp
+mama papa
