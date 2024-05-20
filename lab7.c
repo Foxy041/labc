@@ -57,12 +57,4 @@ int main(){
 	printf("%s %s %d", h1.name, h1.surname, h1.age);
     fclose(fr);
     fclose(fw);
-	return 0;}
-
-blyn ya vashe hz che pysat'
-	aaaaaaa
-	aaaaaaaa
-pomogite
-help please
-heeeeelp
-mama papa
+	return 0;
