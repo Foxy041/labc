@@ -33,7 +33,7 @@ struct humen{
 		int age;};
 
 int main(){
-	struct humen h1 = {"Alex", "Maslovic", 13};
+	struct humen h1 = {"Olga", "Kurbanova", 13};
 	struct humen h;
 	int i;
     setlocale(LC_ALL, "Rus");
