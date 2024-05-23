@@ -90,7 +90,3 @@ int main(){
 	fclose(fr);
 	return 0;}
 
-
-рвзыьралщы
-
-
