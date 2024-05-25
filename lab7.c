@@ -3,58 +3,51 @@
 Ввести с консоли или из файла элементы одного массива и построить на их основе другой, упорядочив элементы по годам рождения.
 Вывести результат.*/
 
+
 #include <stdio.h>
+#include <string.h>
 #include <stdlib.h>
 #include <locale.h>
-int sort(){
-	int i, j, q, ar[5] = {1, 3, 4, 6, 8};
-	
 
-	for (i = 0; i < 5; i++){
-		for (j = 0; j < 5 - i; j++){
-			if(ar[j] > ar[j+1]){
-				q = ar[j];
-				ar[j] = ar[j+1];
-				ar[j+1] = q;}}}
-				
-	for(i = 0; i < 5; i++){
-		printf("%d", ar[i]);
-	}
-	
-	return 0;
+struct human {
+    char name[256];
+    char surname[256];
+    int birth_year;
+};
+
+void sort_array(struct human arr[], int size) {
+    int i, j;
+    struct human temp;
+
+    for (i = 0; i < size - 1; i++) {
+        for (j = 0; j < size - i - 1; j++) {
+            if (arr[j].birth_year > arr[j + 1].birth_year) {
+                temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+        }
+    }
 }
 
-
-
-
-В ФАЙЛЕ
-struct humen{
-		char name[8], surname[16];
-		int age;};
-
-int main(){
-	struct humen h1 = {"Olga", "Kurbanova", 13};
-	struct humen h;
-	int i;
+int main() {
     setlocale(LC_ALL, "Rus");
-    char s[64], nums[4], buf[16], *f1 = "t.txt", *f2 = "t1.txt";
-    FILE *fr = fopen(f1, "r"), *fw = fopen(f2, "w");
-    
-	while (fgets(s, 64, fr) != NULL){
-		for (i = 0; i < 64; i++){
-			if (i < 8){
-				strcpy(h.name[i], s[i]);}
-			if (i > 8 && i < 32){
-				strcpy(h.surname[i], s[i]);}
-			if (s[i] == '1' && s[i+1] == '9'){
-				nums[0] = s[i];
-				nums[1] = s[i+1];
-				nums[2] = s[i+2];
-				nums[3] = s[i+3];
-				h.age = atoi(nums);}}
-		printf("%s %s %d", h.name, h.surname, h.age);}
-	
-	printf("%s %s %d", h1.name, h1.surname, h1.age);
-    fclose(fr);
-    fclose(fw);
-	return 0;
+
+    struct human humans1[4];
+    struct human humans2[4];
+
+    printf("данные для массива:\n");
+    for (int i = 0; i < 4; i++) {
+        printf("Введите имя фамилию год рождения человека №%d:\n", i + 1);
+        scanf("%s %s %d", humans1[i].name, humans1[i].surname, &humans1[i].birth_year);
+    }
+
+    sort_array(humans1, 4);
+
+    printf("\nмассив по году рождения:\n");
+    for (int i = 0; i < 4; i++) {
+        printf("%s %s %d\n", humans1[i].name, humans1[i].surname, humans1[i].birth_year);
+    }
+
+    return 0;
+}
