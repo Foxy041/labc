@@ -7,7 +7,6 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include <locale.h>
 
 struct human {
     char name[256];
@@ -15,7 +14,7 @@ struct human {
     int birth_year;
 };
 
-void sort_array(struct human arr[], int size) {
+void sortbyyear(struct human arr[], int size) {
     int i, j;
     struct human temp;
 
@@ -31,23 +30,33 @@ void sort_array(struct human arr[], int size) {
 }
 
 int main() {
-    setlocale(LC_ALL, "Rus");
+    int n;
+    printf("Введите размер массива: ");
+    scanf("%d", &n);
 
-    struct human humans1[4];
-    struct human humans2[4];
+    struct human *man1 = (struct human*)malloc(n * sizeof(struct human));
 
-    printf("данные для массива:\n");
-    for (int i = 0; i < 4; i++) {
-        printf("Введите имя фамилию год рождения человека №%d:\n", i + 1);
-        scanf("%s %s %d", humans1[i].name, humans1[i].surname, &humans1[i].birth_year);
+    FILE *file = fopen("input.txt", "r");
+
+    for (int i = 0; i < n; i++) {
+        fscanf(file, "%s %s %d", man1[i].name, man1[i].surname, &man1[i].birth_year);
+        printf("%s %s %d\n", man1[i].name, man1[i].surname, man1[i].birth_year);
     }
 
-    sort_array(humans1, 4);
+    fclose(file);
 
-    printf("\nмассив по году рождения:\n");
-    for (int i = 0; i < 4; i++) {
-        printf("%s %s %d\n", humans1[i].name, humans1[i].surname, humans1[i].birth_year);
+    sortbyyear(man1, n);
+
+    file = fopen("output.txt", "w");
+
+    for (int i = 0; i < n; i++) {
+        printf("%s %s %d\n", man1[i].name, man1[i].surname, man1[i].birth_year);
+        fprintf(file, "%s %s %d\n", man1[i].name, man1[i].surname, man1[i].birth_year);
     }
+
+    fclose(file);
+
+    free(man1); 
 
     return 0;
 }
