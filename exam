@@ -1,0 +1,156 @@
+dfhbfyn 1
+
+
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+void umn_matrix(int matrix1[][100], int matrix2[][100], int result[][100], int n1, int n2) {
+    for (int i = 0; i < n1; i++) {
+        for (int j = 0; j < n2; j++) {
+            result[i][j] = 0;
+            for (int k = 0; k < n1; k++) {
+                result[i][j] += matrix1[i][k] * matrix2[k][j];
+            }
+        }
+    }
+}
+
+void sloz_matrix(int matrix1[][100], int matrix2[][100], int result[][100], int n) {
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            result[i][j] = matrix1[i][j] + matrix2[i][j];
+        }
+    }
+}
+
+int main() {
+    
+    srand(time(NULL));
+
+    int n1;
+   
+    printf("vvedite razmer 1: ");
+    scanf("%d", &n1);
+   
+    int matrix1[n1][n1];
+   
+    for (int i = 0; i < n1; i++) {
+        for (int j = 0; j < n1; j++) {
+            matrix1[i][j] = rand() % 101;
+        }
+    }
+   
+    int n2;
+    printf("vvedite razmer 2: ");
+    scanf("%d", &n2);
+   
+    int matrix2[n2][n2];
+    for (int i = 0; i < n2; i++) {
+        for (int j = 0; j < n2; j++) {
+            matrix2[i][j] = rand() % 101;
+        }
+    }
+    
+    FILE *fp = fopen("input.txt", "w");
+    if (fp == NULL) {
+        printf("net\n");
+        return 1;
+    }
+
+    for (int i = 0; i < n1; i++) {
+        for (int j = 0; j < n1; j++) {
+            fprintf(fp, "%d ", matrix1[i][j]);
+        }
+        fprintf(fp, "\n");
+    }
+
+    fprintf(fp, "\n"); 
+
+    for (int i = 0; i < n2; i++) {
+        for (int j = 0; j < n2; j++) {
+            fprintf(fp, "%d ", matrix2[i][j]);
+        }
+        fprintf(fp, "\n");
+    }
+
+    fclose(fp);
+
+     
+     // ochistka massivov
+     for (int i = 0; i < n1; i++) {
+     for (int j = 0; j < n1; j++) {
+          matrix1[i][j] = 0;
+       }
+     }
+   for (int i = 0; i < n2; i++) {
+     for (int j = 0; j < n2; j++) {
+       matrix2[i][j] = 0;
+        }
+     }
+
+
+ FILE *input_file = fopen("input.txt", "r");
+    if (input_file == NULL) {
+        printf("net\n");
+        return 1;
+    }
+
+    FILE *output_file = fopen("output.txt", "w");
+    if (output_file == NULL) {
+        printf("net\n");
+        return 1;
+    }
+
+    fscanf(input_file, "%d", &n1);
+    fscanf(input_file, "%d", &n2);
+
+    
+    int result_umn[n1][n2];
+    int result_sloz[n1][n1];
+
+    for (int i = 0; i < n1; i++) {
+        for (int j = 0; j < n1; j++) {
+            fscanf(input_file, "%d", &matrix1[i][j]);
+        }
+    }
+
+    for (int i = 0; i < n2; i++) {
+        for (int j = 0; j < n2; j++) {
+            fscanf(input_file, "%d", &matrix2[i][j]);
+        }
+    }
+
+    fclose(input_file);
+
+    clock_t start = clock();
+
+    umn_matrix(matrix1, matrix2, result_umn, n1, n2);
+    sloz_matrix(matrix1, matrix2, result_sloz, n1);
+
+    fprintf(output_file, "res *:\n");
+    for (int i = 0; i < n1; i++) {
+        for (int j = 0; j < n2; j++) {
+            fprintf(output_file, "%d ", result_umn[i][j]);
+        }
+        fprintf(output_file, "\n");
+    }
+
+    fprintf(output_file, "\nres +:\n");
+    for (int i = 0; i < n1; i++) {
+        for (int j = 0; j < n1; j++) {
+            fprintf(output_file, "%d ", result_sloz[i][j]);
+        }
+        fprintf(output_file, "\n");
+    }
+
+    fclose(output_file);
+
+    clock_t end = clock();
+    double time_spent = (double)(end - start) / CLOCKS_PER_SEC;
+    printf("vremya: %.3f sek\n", time_spent);
+
+    return 0;
+}
