@@ -1,0 +1,110 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+int main() {
+    srand(time(NULL));
+    int N, M;
+
+    printf("vvedite kolvo chisel: ");
+    scanf("%d", &N);
+
+    int numbers[N];
+    FILE *fp = fopen("input.txt", "w");
+    if (fp == NULL) {
+        printf("net!\n");
+        return 1;
+    }
+
+    for (int i = 0; i < N; i++) {
+        numbers[i] = rand() % 101;
+        fprintf(fp, "%d\n", numbers[i]);
+    }
+    fclose(fp);
+
+    FILE *input_file = fopen("input.txt", "r");
+    FILE *output_file = fopen("output.txt", "w");
+    if (input_file == NULL || output_file == NULL) {
+        printf("net!\n");
+        return 1;
+    }
+
+    int number;
+    while (fscanf(input_file, "%d", &number) != EOF) {
+        if (number % 5 == 0 && number % 7 == 0) {
+            fprintf(output_file, "ПЯТЬСЕМЬ ");
+        } else if (number % 5 == 0) {
+            fprintf(output_file, "ПЯТЬ ");
+        } else if (number % 7 == 0) {
+            fprintf(output_file, "СЕМЬ ");
+        } else {
+            fprintf(output_file, "%d ", number);
+        }
+    }
+    fclose(input_file);
+    fclose(output_file);
+
+    printf("vvedite stolby: ");
+    scanf("%d", &M);
+
+    input_file = fopen("input.txt", "r");
+    if (input_file == NULL) {
+        printf("net!\n");
+        return 1;
+    }
+
+    int matrix[N / M][M];
+    int i = 0, j = 0;
+    while (fscanf(input_file, "%d", &number) != EOF) {
+        matrix[i][j] = number;
+        j++;
+        if (j == M) {
+            j = 0;
+            i++;
+        }
+    }
+    fclose(input_file);
+
+    int row_sums[N / M], col_sums[M];
+    for (i = 0; i < N / M; i++) {
+        row_sums[i] = 0;
+        for (j = 0; j < M; j++) {
+            row_sums[i] += matrix[i][j];
+        }
+    }
+
+    for (j = 0; j < M; j++) {
+        col_sums[j] = 0;
+        for (i = 0; i < N / M; i++) {
+            col_sums[j] += matrix[i][j];
+        }
+    }
+
+    printf("matriza:\n");
+    for (i = 0; i < N / M; i++) {
+        for (j = 0; j < M; j++) {
+            printf("%d ", matrix[i][j]);
+        }
+        printf("\n");
+    }
+
+    printf("sum str: ");
+    for (i = 0; i < N / M; i++) {
+        printf("%d ", row_sums[i]);
+    }
+    printf("\n");
+
+    printf("sum stolb: ");
+    for (j = 0; j < M; j++) {
+        printf("%d ", col_sums[j]);
+    }
+    printf("\n");
+
+    clock_t start = clock();
+    start = clock();
+    clock_t end = clock();
+    double time_spent = (double)(end - start) / CLOCKS_PER_SEC;
+    printf("Время: %.3f сек\n", time_spent);
+
+    return 0;
+}
