@@ -1,0 +1,76 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <stdbool.h>
+
+    void kvadrat_matrizy(int m) {
+        int matrix[m][m];
+        srand(time(NULL));
+
+    for (int i = 0; i < m; i++) {
+    for (int j = 0; j < m; j++) {
+        matrix[i][j] = rand() % 10;
+    printf("%d ", matrix[i][j]);}
+printf("\n");}
+}
+
+int main() {
+
+FILE *file = fopen("input.txt", "r");
+ 
+ 
+ int day, month, year;
+ fscanf(file, "%d.%d.%d", &day, &month, &year);
+ fclose(file);
+
+ struct tm target_date = {0};
+ target_date.tm_year = year - 1900;
+ target_date.tm_mon = month - 1;
+ target_date.tm_mday = day;
+
+ time_t target_time = mktime(&target_date);
+ time_t current_time = time(NULL);
+
+ double seconds = difftime(target_time, current_time);
+ int days_difference = (int)(seconds / (60 * 60 * 24));
+ printf("Difference in days: %d\n", days_difference);
+ clock_t start_time = clock();
+ FILE *output_file = fopen("output.txt", "w");
+    if (!output_file) {
+    printf("net\n");
+return 1;}
+
+    int matrix1[3][3], sum1 = 0, sum2 = 0;
+srand(time(NULL));
+
+    while (true) {
+        for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
+    matrix1[i][j] = rand() % 10;
+fprintf(output_file, "%d ", matrix1[i][j]);
+    sum1 += matrix1[i][j];}
+fprintf(output_file, "\n");}
+fprintf(output_file, "\n");
+
+    if (sum1 != sum2) {
+        for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
+fprintf(output_file, "%d ", matrix1[i][j]);}
+fprintf(output_file, "\n");}
+    break;} 
+    else {
+sum2 = sum1;}
+}
+
+    fclose(output_file);
+
+    kvadrat_matrizy(3);
+
+  
+clock_t end_time = clock();
+double time_spent = ((double)(end_time - start_time)) / CLOCKS_PER_SEC;
+printf("vremya %f sec\n", time_spent);
+
+
+return 0;
+}
