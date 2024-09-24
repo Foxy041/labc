@@ -1,0 +1,68 @@
+main.cpp
+#include <iostream>
+#include "vector2.h"
+using namespace std;
+
+int main()
+{
+    Vector2 v1, v2, v3, v4;
+    v1.x = 1; v1.y = -1;
+    v2.x = 3; v2.y = 5;
+    info(v1);
+    info(v2);
+    
+    v3 = sum (v1, v2);
+    info(v3);
+    
+    v4= differ(v1, v2);
+    info(v4);
+    return 0;
+    
+}
+
+
+
+vector2.h
+#ifndef VECTOR2_H
+#define VECTOR2_H
+
+struct Vector2 {
+    double x;
+    double y;
+};
+
+void info(Vector2 v);
+Vector2 sum(Vector2 v1, Vector2 v2);
+Vector2 differ(Vector2 v1, Vector2 v2);
+
+enum Qadrant {I, II, III, IV};
+ 
+  
+
+
+#endif
+
+
+
+vector2.cpp
+#include "vector2.h"
+#include <iostream>
+
+void info(Vector2 v) {
+    std::cout << "(" << v.x << ", " << v.y << ")\n";
+}
+
+Vector2 sum(Vector2 v1, Vector2 v2) {
+    Vector2 result; 
+    result.x = v1.x + v2.x;
+    result.y = v1.y + v2.y;
+    return result;
+}
+
+Vector2 differ(Vector2 v1, Vector2 v2) {
+    Vector2 result; 
+    result.x = v1.x - v2.x;
+    result.y = v1.y - v2.y;
+    return result;
+    
+}
